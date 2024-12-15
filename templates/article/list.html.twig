@@ -1,0 +1,59 @@
+{# templates/article/list.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}All Articles{% endblock %}
+
+{% block body %}
+    <h1>Articles List</h1>
+
+    <div class="articles-list">
+        {% for article in articles %}
+            <div class="article-item">
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.content|slice(0, 100) }}...</p>  <!-- Affiche les 100 premiers caractères -->
+                <a href="{{ path('article_show', {'id': article.id}) }}">
+                    <button>View Details</button>
+                </a>
+            </div>
+        {% else %}
+            <p>No articles found.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .articles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .article-item {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .article-item h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .article-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+        .article-item button {
+            padding: 10px 20px;
+            margin-top: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .article-item button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+{% endblock %}
